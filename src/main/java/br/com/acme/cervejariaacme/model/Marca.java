@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.converter.json.GsonBuilderUtils;
 
 import java.time.LocalDate;
@@ -26,6 +27,7 @@ public class Marca {
     //@Column(name = "emailFornecedor")
     @Email(message = "O email deve ser um email valido")
     private String email;
-    @Past
+    @Past(message = "A Data é invalida")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dataFundacao;
 }

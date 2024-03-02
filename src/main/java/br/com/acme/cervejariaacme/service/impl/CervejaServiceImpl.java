@@ -60,7 +60,7 @@ public class CervejaServiceImpl implements CervejaService {
          */
          List<Predicate> predicates = new ArrayList<>();
 
-        if(filters.getNome().isPresent()){
+        if(filters.getNome().isPresent() && !filters.getNome().get().isEmpty()){
             String query = filters.getNome().get() + "%";
             Predicate nome = cb.like(cerveja.get("nome"), query);
             predicates.add(nome);
@@ -73,7 +73,7 @@ public class CervejaServiceImpl implements CervejaService {
             Predicate marca = cb.equal(cerveja.get("marca"), filters.getMarca().get());
             predicates.add(marca);
         }
-        if(filters.getPais().isPresent()){
+        if(filters.getPais().isPresent() && !filters.getPais().get().isEmpty()){
             Predicate pais = cb.equal(cerveja.get("marca").<String>get("pais"), filters.getPais().get());
             predicates.add(pais);
         }
