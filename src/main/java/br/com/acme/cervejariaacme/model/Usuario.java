@@ -16,6 +16,7 @@ public class Usuario {
     private String email;
     private String nome;
     private Integer status;
+    private String password;
     @ManyToMany(fetch = FetchType.EAGER)
     Set<Role> roles;
 

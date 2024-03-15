@@ -269,14 +269,6 @@
 <div id="dias" data-valor="['M']" th:data-message="${message}">
 </div>
 <script th:inline="javascript">
-    /*<![CDATA[*/
-    var segunda = /*[[${vendasPorDias.get(1)}]]*/ 'default';
-    var terca = /*[[${vendasPorDias.get(2)}]]*/ 'default';
-    var quarta = /*[[${vendasPorDias.get(3)}]]*/ 'default';
-    var quinta = /*[[${vendasPorDias.get(4)}]]*/ 'default';
-    var sexta = /*[[${vendasPorDias.get(5)}]]*/ 'default';
-    var sabado = /*[[${vendasPorDias.get(6)}]]*/ 'default';
-    var domingo = /*[[${vendasPorDias.get(0)}]]*/ 'default';
 
     var ctx = document.getElementById("chart-bars").getContext("2d");
 
@@ -291,7 +283,7 @@
                 borderRadius: 4,
                 borderSkipped: false,
                 backgroundColor: "rgba(255, 255, 255, .8)",
-                data: [segunda,terca,quarta,quinta,sexta,sabado,domingo],
+                data: [50, 20, 10, 22, 50, 10, 40],
                 maxBarThickness: 6
             }, ],
         },

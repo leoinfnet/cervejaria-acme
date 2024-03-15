@@ -49,4 +49,16 @@ public class UsuarioServiceImpl implements UsuarioService {
     public List<Usuario> findAllByRoles(List<Role> roles) {
         return usuarioRepository.findAllByRole(roles);
     }
+
+    @Override
+    public Optional<Usuario> findByEmail(String email) {
+        return usuarioRepository.findByEmail(email);
+
+    }
+
+    @Override
+    public Boolean hasRole(Usuario usuario, String role) {
+        return usuario.getRoles()
+                .stream().anyMatch(role1 -> role1.getNome().equals(role));
+    }
 }

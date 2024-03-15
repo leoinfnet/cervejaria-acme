@@ -41,8 +41,8 @@
                     <span class="nav-link-text ms-1">Tipos de Cervejas</span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link text-white " href="../pages/virtual-reality.html">
+            <li th:if="${@usuarioServiceImpl.hasRole(#ctx.session.usuarioLogado,'ADMIN')}" class="nav-item">
+                <a class="nav-link text-white "  th:href="@{/usuario}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">view_in_ar</i>
                     </div>

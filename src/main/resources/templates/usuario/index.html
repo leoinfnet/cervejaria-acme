@@ -1,0 +1,188 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="apple-touch-icon" sizes="76x76" th:href="@{/assets/img/apple-icon.png}">
+    <link rel="icon" type="image/png" th:href="@{/assets/img/favicon.png}">
+    <title>
+        Material Dashboard 2 by Creative Tim
+    </title>
+    <!--     Fonts and icons     -->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+    <!-- Nucleo Icons -->
+    <link th:href="@{/assets/css/nucleo-icons.css}"  rel="stylesheet" />
+    <link th:href="@{/assets/css/nucleo-svg.css}" rel="stylesheet" />
+    <link th:rel="stylesheet" th:href="@{/assets/css/iziToast.css} "/>
+    <!-- Font Awesome Icons -->
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/60e673586c.js" crossorigin="anonymous"></script>
+
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <!-- CSS Files -->
+    <link id="pagestyle"  th:href="@{/assets/css/material-dashboard.css}"  rel="stylesheet" />
+    <!-- Nepcha Analytics (nepcha.com) -->
+    <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
+    <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
+</head>
+
+<body class="g-sidenav-show  bg-gray-200">
+<div th:replace="components/sidebar.html"></div>
+<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+    <!-- Navbar -->
+    <div th:replace="components/navbar.html"></div>
+
+    <div style="margin-top: 20px" class="container-fluid px-2 px-md-4">
+        <div class="row">
+            <div style="margin-bottom: 15px" class="col-3">
+                <a class="btn btn-outline-primary btn-sm mb-0 me-3"  th:href="@{/marcas/adicionarForm}" >Adicionar Marca de Cerveja</a>
+
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card my-4">
+                        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                            <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                                <h6 class="text-white text-capitalize ps-3">Marcas de Cervejas</h6>
+                            </div>
+                        </div>
+                        <div class="card-body px-0 pb-2">
+                            <div class="table-responsive p-0">
+                                <table class="table align-items-center mb-0">
+                                    <thead>
+                                    <tr>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Nome</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"> Ações</th>
+                                        <th class="text-secondary opacity-7"></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="usuario : ${usuarios}">
+                                        <td>
+                                            <div class="d-flex px-2 py-1">
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm" th:text="${usuario.id}"></h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <p class="text-xs font-weight-bold mb-0" th:text="${usuario.nome}"></p>
+
+                                        </td>
+                                        <td>
+                                            <p th:each="role : ${usuario.roles}" class="text-xs font-weight-bold mb-0" th:text="${role.nome}"></p>
+
+                                        </td>
+
+
+                                        <td>
+                                            <div class="row">
+
+                                                <div class="col-1">
+                                                    <a  th:href="@{/marcas/remover/{id}(id=${usuario.id})}">
+                                                        <i class="fa-solid fa-minus" title="Remover"></i>
+                                                    </a>
+                                                </div>
+                                                <div class="col-1">
+                                                    <a  th:href="@{/tipo-cervejas/editarForm/{id}(id=${usuario.id})}">
+                                                        <i class="fa-solid fa-pen" title="Editar"></i>
+                                                    </a>
+                                                </div>
+
+                                            </div>
+
+
+
+                                        </td>
+                                    </tr>
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <div th:replace="components/footer.html"> </div>
+    <div id="show-sucess" th:data-valor="${sucesso}" th:data-message="${message}">
+    </div>
+    <div id="show-sucess-delete" th:data-valor="${sucessoDelete}">
+    </div>
+</main>
+<!--   Core JS Files   -->
+<script th:src="@{/assets/js/core/popper.min.js}"></script>
+<script th:src="@{/assets/js/core/bootstrap.min.js}"></script>
+<script th:src="@{/assets/js/plugins/perfect-scrollbar.min.js}"></script>
+<script th:src="@{/assets/js/plugins/smooth-scrollbar.min.js}"></script>
+<script th:src="@{/assets/js/plugins/chartjs.min.js}"></script>
+<script th:src="@{/webjars/jquery/3.7.1/jquery.min.js}"></script>
+<script th:src="@{/assets/js/iziToast.min.js}"></script>
+<script>
+
+    const $showSucess = $('#show-sucess')
+    const valorDoHtml = $showSucess.data('valor')
+    const message =  $showSucess.data('message');
+    console.log(valorDoHtml)
+    if(valorDoHtml === true) {
+        iziToast.show({
+            title: 'Sucesso',
+            message: message,
+            position: 'topRight',
+            timeout: 5000,
+            color: 'green'
+
+        });
+    }
+</script>
+<script>
+    const $showSucessDelete = $('#show-sucess-delete')
+    const showDelete = $showSucessDelete.data('valor')
+    console.log(showDelete)
+    if(showDelete === true) {
+        iziToast.show({
+            title: 'Sucesso',
+            message: 'Cerveja Deletada com sucesso!',
+            position: 'topRight',
+            timeout: 5000,
+            color: 'green'
+
+        });
+    }else if(showDelete === false) {
+        iziToast.show({
+            title: 'Erro!',
+            message: 'Marca associada a outra entidade, delete-a antes!',
+            position: 'topRight',
+            timeout: 5000,
+            color: 'red'
+        });
+    }
+</script>
+
+<script>
+    var win = navigator.platform.indexOf('Win') > -1;
+    if (win && document.querySelector('#sidenav-scrollbar')) {
+        var options = {
+            damping: '0.5'
+        }
+        Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+    }
+</script>
+<!-- Github buttons -->
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+<!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+<script th:src="@{/assets/js/material-dashboard.min.js}"></script>
+</body>
+
+</html>

@@ -15,4 +15,7 @@ public interface UsuarioService {
     void deleteById(Long id);
     List<Usuario> findAllUsuariosAtivos();
     List<Usuario> findAllByRoles(List<Role> roles);
+
+    Optional<Usuario> findByEmail(String email);
+    Boolean hasRole(Usuario usuario,String role);
 }
